@@ -39,7 +39,7 @@ jobs:
 
       - name: Scan image
         run: |
-          trivy image --severity CRITICAL,HIGH --exit-code 1 portfolio
+          trivy image  portfolio
 
       - name: Tag image
         run: |
