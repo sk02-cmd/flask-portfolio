@@ -1,4 +1,4 @@
-name: Build, Scan, Push and Deploy to ECS
+name: Build, Scan, Push to ECR
 
 on:
   push:
