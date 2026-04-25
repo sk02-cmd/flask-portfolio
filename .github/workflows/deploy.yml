@@ -50,4 +50,20 @@ jobs:
         run: |
           docker push 320060061347.dkr.ecr.eu-north-1.amazonaws.com/portfolio:latest
 
+      - name: Deploy on EC2
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.EC2_HOST_NEW}}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd /home/ec2-user
+
+            aws ecr get-login-password --region eu-north-1 | \
+            docker login --username AWS --password-stdin 320060061347.dkr.ecr.eu-north-1.amazonaws.com
+
+            docker compose pull
+            docker compose up -d --force-recreate
+      
+
      
